@@ -25,8 +25,9 @@ $top__inner_subtitle = get_field('top__inner_subtitle');
 $description_corsec = get_field('description_corsec');
 $course_cost = get_field('course_cost');
 $new_price = get_field('new_price');
+// $old_price = get_field('old_price');
 $old_price = get_field('old_price');
-// $gallery_images = get_field('gallery_images'); 
+
 $gallery_images = get_field('gallery_images'); 
 
 
