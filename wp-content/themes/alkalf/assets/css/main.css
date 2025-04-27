@@ -419,6 +419,11 @@ body {
   height: 294px !important;
 }
 
+.swiper-slide-prev .swiper__inner img,
+.swiper-slide-next .swiper__inner img {
+  filter: blur(3px) !important;
+}
+
 .swiper-pagination-one {
   text-align: center;
   padding-top: 30px;
