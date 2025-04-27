@@ -27,6 +27,8 @@ $course_cost = get_field('course_cost');
 $new_price = get_field('new_price');
 $old_price = get_field('old_price');
 $gallery_images = get_field('gallery_images'); 
+// $gallery_images = get_field('gallery_images'); 
+
 
 
 $title_block_you_want = get_field('title_block_you_want');
