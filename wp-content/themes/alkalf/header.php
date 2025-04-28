@@ -64,7 +64,7 @@
 
         <div class="container">
             <div class="header__inner">
-                <div class="header__logo"><a href="#" class="logo">ai<span>v</span>kalf</a></div>
+                <div class="header__logo"><a href="/" class="logo">ai<span>v</span>kalf</a></div>
                 <div class="burger" id="burger">
                     <span></span>
                     <span></span>

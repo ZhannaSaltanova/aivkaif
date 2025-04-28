@@ -69,6 +69,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+a:visited {
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
 
 ul {
   margin: 0;
@@ -657,7 +663,36 @@ body {
   background-color: #1D6528;
   border: none;
 }
+.swiper__inner-two {
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 35px;
+}
 
+.feedback_top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+.review_information .feedback__name {
+  line-height: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.review_information .feedback__job {
+  margin-bottom: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+}
+.review_information .feedback__stars {
+  margin-bottom: 5px;
+}
+.feedback__text {
+  font-weight: 500;
+}
 .feedback .title {
   color: #FFFFFF;
 }

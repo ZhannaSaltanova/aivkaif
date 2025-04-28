@@ -1,5 +1,7 @@
 <?php 
-
+$course_cost = get_field('course_cost');
+$new_price = get_field('new_price');        
+$old_price = get_field('old_price');
 ?>
 <section class="course">
     <div class="container">

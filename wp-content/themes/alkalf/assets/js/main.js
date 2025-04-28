@@ -113,28 +113,13 @@ updateCountdown();
 
 
 
-  const swipertwo = new Swiper('.swiper-two', {
-    centeredSlides: true,
-    loop: true,
-    pagination: {
-        el: '.swiper-pagination-two',
-        clickable: true,
-      },
-      breakpoints: {
-            480: {
-              slidesPerView: 1,
-              spaceBetween: 20
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 20
-            }
-          }
-  });
+const swipertwo = new Swiper('.swiper-two', {
+  centeredSlides: true,
+  pagination: {
+    el: '.swiper-pagination-two',
+    clickable: true,
+  },
+});
 
 
   // Скрол к нужной секции
