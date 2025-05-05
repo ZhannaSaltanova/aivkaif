@@ -22,7 +22,7 @@ $fifth_subtitle_description = get_field('fifth_subtitle_description');
             <?php endif; ?>
             <div class="about__inner-steps">
                 <ul class="steps-list">
-                    <img src="./images/about-img.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-img.png" alt="зірочка">
                     <?php if($first_subtitle): ?>
                     <li class="item-title">
                     <?php echo esc_html($first_subtitle); ?>
@@ -34,7 +34,7 @@ $fifth_subtitle_description = get_field('fifth_subtitle_description');
                     <?php endif; ?>
                 </ul>
                 <ul class="steps-list">
-                    <img src="../assets/images/about-img.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-img.png" alt="зірочка">
                     <?php if($second_subtitle): ?>
                     <li class="item-title"><?php echo esc_html($second_subtitle); ?></li>
                     <?php endif; ?>
@@ -43,7 +43,7 @@ $fifth_subtitle_description = get_field('fifth_subtitle_description');
                     <?php endif; ?>
                 </ul>
                 <ul class="steps-list">
-                    <img src="../assets/images/about-img.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-img.png" alt="зірочка">
                     <?php if($third_subtitle): ?>
                     <li class="item-title"><?php echo esc_html($third_subtitle); ?></li>
                     <?php endif; ?>
@@ -52,7 +52,7 @@ $fifth_subtitle_description = get_field('fifth_subtitle_description');
                     <?php endif; ?>
                 </ul>
                 <ul class="steps-list">
-                    <img src="../assets/images/about-img.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-img.png" alt="зірочка">
                     <?php if($fourth_subtitle): ?>
                     <li class="item-title"><?php echo esc_html($fourth_subtitle); ?></li>
                     <?php endif; ?>
@@ -61,7 +61,7 @@ $fifth_subtitle_description = get_field('fifth_subtitle_description');
                     <?php endif; ?>
                 </ul>
                 <ul class="steps-list">
-                    <img src="../assets/images/about-img.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-img.png" alt="зірочка">
                     <?php if($fifth_subtitle): ?>
                     <li class="item-title"><?php echo esc_html($fifth_subtitle); ?></li>
                     <?php endif; ?>

@@ -3,17 +3,19 @@ $top__inner = get_field('top__inner');
 $top__inner_subtitle = get_field('top__inner_subtitle');
 $description_corsec = get_field('description_corsec');
 $course_cost = get_field('course_cost');
-$new_price = get_field('new_price');
-$old_price = get_field('old_price');
+$new_price = get_field('new_price','option');
+$old_price = get_field('old_price','option');
 $gallery_images = get_field('gallery_images'); 
+$number_discount = get_field('number_discount', 'option');
+
 ?>
 
 <section class="top">
     <div class="container">
         <div class="top__inner">
             <div class="left-block">
-                <img src="./images/gallery-2.jpg" alt="Image Left" class="promo-img promo-img--left">
-                <img src="./images/gallery-3.jpg" alt="Image Right" class="promo-img promo-img--right">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/gallery-2.jpg" alt="Image Left" class="promo-img promo-img--left">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/gallery-3.jpg" alt="Image Right" class="promo-img promo-img--right">
                 <div class="top__inner-text">
                     <?php if($top__inner): ?>
                     <div class="top__inner_text_head">
@@ -64,13 +66,14 @@ $gallery_images = get_field('gallery_images');
                             </div>
                         </div>
                         <div class="header__discount-circle">
-                            <img src="./assets/images/discount-img.png" alt="">
-
-                            <div class="circle-text">85<span>%</span></div>
-                            <img src="./images/discount-img2.png" alt="">
-                        </div>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/discount-img.webp" alt="Скидка">
+                        <?php if($number_discount): ?>
+                    <div class="circle-text"><?php echo esc_html($number_discount); ?><span>%</span></div>
+                    <?php endif; ?>                       
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/discount-img2.webp" alt="Скидка">
+                            </div>
                     </div>
-                    <button class="register-btn">ЗАРЕЄСТРУВАТИСЬ ЗАРАЗ</button>
+                    <?php echo do_shortcode('[register_button]'); ?>
                     <div class="note">Заповніть форму та отримайте доступ до курсу</div>
                 </div>
             </div>

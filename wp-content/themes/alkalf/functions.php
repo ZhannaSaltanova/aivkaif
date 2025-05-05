@@ -181,3 +181,68 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+
+
+if (function_exists('acf_add_options_page')) {
+    acf_add_options_page(array(
+        'page_title'    => esc_html__('Theme General Settings', 'alkalf'),
+        'menu_title'    => esc_html__('Основна інформація по сайту', 'alkalf'),
+        'menu_slug'     => 'theme-general-settings',
+        'capability'    => 'edit_posts',
+        'redirect'      => false,
+        'update_button' => __('Update', 'alkalf'),
+        'updated_message' => __("Options updated", 'alkalf'),
+    ));
+}
+
+function get_page_id($template_name) {
+   $pages = get_posts([
+       'post_type' => 'page',
+       'post_status' => 'publish',
+       'meta_query' => [
+           [
+               'key' => '_wp_page_template',
+               'value' => $template_name . '.php',
+               'compare' => '='
+           ]
+       ]
+   ]);
+   if (!empty($pages)) {
+       foreach ($pages as $pages__value) {
+           return $pages__value->ID;
+       }
+   }
+   return get_bloginfo('url');
+}
+
+add_shortcode('register_button', 'display_register_button');
+function display_register_button() {
+    // Перевірка на наявність функції ACF
+    if (!function_exists('get_field')) {
+        return '<button class="register-btn popmake-132" data-popmake="132">ЗАРЕЄСТРУВАТИСЬ ЗАРАЗ</button>';
+    }
+    
+    // Отримання значення поля з налаштувань
+    $button_enabled = get_field('enable_register_button', 'option'); 
+    
+	if ($button_enabled) { 
+        return '<button class="register-btn popmake-132" data-popmake="132">ЗАРЕЄСТРУВАТИСЬ ЗАРАЗ</button>';
+    } else {
+        return '<button class="register-btn button-disabled" disabled>ЗАРЕЄСТРУВАТИСЬ ЗАРАЗ</button>';
+    }
+}
+
+
+function aivkalf_theme_setup() {
+
+    add_theme_support('custom-logo', array(
+        'height'      => 80,
+        'width'       => 200,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
+
+	add_theme_support('site-icon');
+}
+add_action('after_setup_theme', 'aivkalf_theme_setup');

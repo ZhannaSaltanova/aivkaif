@@ -10,6 +10,19 @@
  */
 
 ?>
+<?php 
+
+
+$menu_one = get_field('menu_one');
+$the_first_menu_item = get_field( 'the_first_menu_item', 'option');
+$the_second_menu_item = get_field('the_second_menu_item', 'option');
+$the_third_menu_item = get_field('the_third_menu_item', 'option');
+$the_fourth_menu_item = get_field('the_fourth_menu_item', 'option');
+$number_discount = get_field('number_discount', 'option');
+?>
+
+
+
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -60,11 +73,23 @@
 			?>
 		</nav> -->
 
+
 		<header class="header">
 
         <div class="container">
             <div class="header__inner">
-                <div class="header__logo"><a href="/" class="logo">ai<span>v</span>kalf</a></div>
+                <div class="header__logo">
+                    <a href="<?php echo home_url(); ?>" class="logo">
+                        <?php if (has_custom_logo()) {
+                            the_custom_logo();
+                        } else {
+                        ?>
+                            ai<span>v</span>kalf
+                        <?php
+                        }
+                        ?>
+                    </a>
+                </div>
                 <div class="burger" id="burger">
                     <span></span>
                     <span></span>
@@ -76,25 +101,35 @@
 
                     <ul class="menu__list">
                         <li class="menu__item">
-                            <a href="/" class="menu__link">Головна</a>
+                        <?php if($the_first_menu_item): ?>
+                            <a href="<?php echo home_url(); ?>" class="menu__link"><?php echo esc_html($the_first_menu_item); ?></a>
+                        <?php endif; ?>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link" id="why">Для кого</a>
+                        <?php if($the_second_menu_item): ?>
+                            <a href="#about" class="menu__link"><?php echo esc_html($the_second_menu_item); ?></a>
+                        <?php endif; ?>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link" id="programa">Програма</a>
+                        <?php if($the_third_menu_item): ?>
+                            <a href="#program" class="menu__link"><?php echo esc_html($the_third_menu_item); ?></a>
+                        <?php endif; ?>
                         </li>
                         <li class="menu__item">
-                            <a href="#" class="menu__link" id="feedback-header">Відгуки</a>
+                        <?php if($the_fourth_menu_item): ?>
+                            <a href="#feedback" class="menu__link"><?php echo esc_html($the_fourth_menu_item); ?></a>
+                        <?php endif; ?>
                         </li>
                     </ul>
                 </nav>
                 <div class="header__discount">
                     <div class="header__discount-text">Знижка на курс</div>
                     <div class="header__discount-circle">
-                        <img src="./images/discount-img.png" alt="">
-                        <div class="circle-text">85<span>%</span></div>
-                        <img src="./images/discount-img2.png" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/discount-img.webp" alt="Скидка">
+                    <?php if($number_discount): ?>
+                    <div class="circle-text"><?php echo esc_html($number_discount); ?><span>%</span></div>
+                    <?php endif; ?>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/discount-img2.webp" alt="Скидка">
                     </div>
                 </div>
             </div>

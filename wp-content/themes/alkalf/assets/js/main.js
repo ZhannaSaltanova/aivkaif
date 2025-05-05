@@ -1,58 +1,62 @@
-const countdownDate = new Date();
-countdownDate.setHours(countdownDate.getHours() + 4);
+if (!window.timerConfig.disable) {
+  let countdownDate;
 
-// Находим все элементы .timer strong
-const timerElements = document.querySelectorAll('.timer strong');
-
-function updateCountdown() {
-  const now = new Date();
-  const diff = countdownDate - now;
-
-  if (diff <= 0) {
-    timerElements.forEach(el => el.textContent = "Акція завершилась");
-    clearInterval(intervalId);
-    return;
+  if (window.timerConfig.customDate) {
+    countdownDate = new Date(window.timerConfig.customDate);
+  } else {
+    const now = new Date();
+    countdownDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   }
 
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
+  const timerElements = document.querySelectorAll('.timer strong');
+  const timerBlocks = document.querySelectorAll('.timer-block');
 
-  const timeText = `${hours} год. ${minutes} хв. ${seconds < 10 ? '0' + seconds : seconds} сек.`;
+  function updateCountdown() {
+    const now = new Date();
+    const diff = countdownDate - now;
 
-  timerElements.forEach(el => el.textContent = timeText);
+    if (diff <= 0) {
+      timerBlocks.forEach(block => {
+        block.style.display = "none";
+      });
+      clearInterval(intervalId);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    let timeText = '';
+    if (days > 0) {
+      timeText += `${days} д. `;
+    }
+    timeText += `${hours} год. ${minutes} хв. ${seconds < 10 ? '0' + seconds : seconds} сек.`;
+
+    timerElements.forEach(el => {
+      el.textContent = timeText;
+    });
+  }
+
+  const intervalId = setInterval(updateCountdown, 1000);
+  updateCountdown();
+} else {
+  const timerBlocks = document.querySelectorAll('.timer-block');
+  timerBlocks.forEach(block => {
+    block.style.display = "none";
+  });
 }
 
-const intervalId = setInterval(updateCountdown, 1000);
-updateCountdown();
 
-
-
-
-
-
-
-
-
-  // const swiperOne = new Swiper('.swiper-one', {
-  //   slidesPerView: 3,
-  //   centeredSlides: true,
-  //   spaceBetween: 25,
-  //   loop: true,
-  //   pagination: {
-  //       el: '.swiper-pagination-one',
-  //       clickable: true,
-  //     },
-  // });
-
-
-
-
-  const swiperOne = new Swiper('.swiper-one', {
-    slidesPerView: 2.3,
+const swiperOne = new Swiper('.swiper-one', {
+  slidesPerView: 2.3,
   centeredSlides: true,
-  // spaceBetween: 20,
   loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
   pagination: {
     el: '.swiper-pagination-one',
     clickable: true,
@@ -67,90 +71,66 @@ updateCountdown();
     scale: 0.85,
   },
   breakpoints: {
-        // 480: {
-        //   slidesPerView: 1,
-        //   spaceBetween: 20
-        // },
-        // 640: {
-        //   slidesPerView: 2,
-        //   spaceBetween: 20
-        // },
-        // 1024: {
-        //   slidesPerView: 3,
-        //   spaceBetween: 20
-        // }
-      }
+  }
 });
-
-// const swiperOne = new Swiper('.swiper-one', {
-//   slidesPerView: 1,
-//   spaceBetween: 20,
-//   loop: true,
-//   pagination: {
-//     el: '.swiper-pagination-one',
-//     clickable: true,
-//   },
-//   navigation: {
-//     nextEl:'.swiper-button-next-one' ,
-//     prevEl:'.swiper-button-prev-one',
-//   },
-//   breakpoints: {
-//     480: {
-//       slidesPerView: 1,
-//       spaceBetween: 20
-//     },
-//     640: {
-//       slidesPerView: 2,
-//       spaceBetween: 20
-//     },
-//     1024: {
-//       slidesPerView: 3,
-//       spaceBetween: 20
-//     }
-//   }
-// });
-
 
 
 
 const swipertwo = new Swiper('.swiper-two', {
-  centeredSlides: true,
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
   pagination: {
     el: '.swiper-pagination-two',
     clickable: true,
   },
+  // Поведение по умолчанию (меньше 767px)
+  slidesPerView: 3,
+  direction: 'vertical',
+
+  breakpoints: {
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      direction: 'vertical',
+    },
+    769: {
+      slidesPerView: 2,
+      direction: 'horizontal',
+      spaceBetween: 30,
+    },
+    1024: {
+      slidesPerView: 3,
+      direction: 'horizontal',
+      spaceBetween: 40,
+    }
+  }
 });
-
-
-  // Скрол к нужной секции
-  document.getElementById('why').addEventListener('click', ()=> {
-    document.getElementById('about').scrollIntoView({behavior: 'smooth'})
-})
-
-document.getElementById('programa').addEventListener('click', ()=> {
-  document.getElementById('cludes').scrollIntoView({behavior: 'smooth'})
-})
-
-document.getElementById('feedback-header').addEventListener('click', ()=> {
-  document.getElementById('feedback').scrollIntoView({behavior: 'smooth'})
-})   
-
-
 
 //Бургер меню
 document.addEventListener('DOMContentLoaded', () => {
   const burger = document.getElementById('burger');
   const menu = document.getElementById('menu');
   const closeBtn = document.getElementById('close');
+  const menuLinks = document.querySelectorAll('.menu__link');
 
   burger.addEventListener('click', () => {
-      menu.classList.add('active');
+    menu.classList.add('active');
   });
 
   closeBtn.addEventListener('click', () => {
+    menu.classList.remove('active');
+  });
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
       menu.classList.remove('active');
+    });
   });
 });
+
 
 
 
@@ -164,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const icon = item.querySelector('.toggle-icon');
 
       const toggle = () => {
-        // Закрываем все кроме текущего
         items.forEach(i => {
           if (i !== item) i.classList.remove('active');
         });
@@ -173,12 +152,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       day.addEventListener('click', toggle);
       icon.addEventListener('click', (e) => {
-        e.stopPropagation(); // чтобы не сработал двойной клик
+        e.stopPropagation(); 
         toggle();
       });
     });
   }
 });
 
+// Скрол к нужной секции
+document.getElementById('why').addEventListener('click', () => {
+  document.getElementById('about').scrollIntoView({ behavior: 'smooth' })
+})
 
+document.getElementById('programa').addEventListener('click', () => {
+  document.getElementById('cludes').scrollIntoView({ behavior: 'smooth' })
+})
+
+document.getElementById('feedback-header').addEventListener('click', () => {
+  document.getElementById('feedback').scrollIntoView({ behavior: 'smooth' })
+})
 
